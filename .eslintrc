@@ -1,0 +1,45 @@
+{
+  "extends": ["airbnb", "plugin:flowtype/recommended"],
+  "parser": "babel-eslint",
+  "plugins": ["react", "import", "flowtype"],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "root": true,
+  "rules": {
+    // "block-spacing": [1, "always"],
+    // "computed-property-spacing": [1, "always"],
+    // "function-paren-newline": 0,
+    // "generator-star-spacing": [2, { "before": false, "after": true }],
+    // "global-require": 0,
+    // "import/no-named-as-default": 2,
+    "indent": [2, 2, { "SwitchCase": 1 }],
+    // "no-console": 1,
+    // "no-alert": 1,
+    "no-underscore-dangle": [
+      "error",
+      {
+        "allow": ["__PRELOADED_STATE__", "__REDUX_DEVTOOLS_EXTENSION_COMPOSE__"]
+      }
+    ],
+    // "no-useless-constructor": 0,
+    // "no-bitwise": 0,
+    // "object-curly-spacing": [1, "always"],
+    "react/jsx-filename-extension": 0,
+
+    "react/prop-types": 2
+    // "react/jsx-curly-spacing": [1, "always"]
+    // "react/require-default-props": 0,
+    // "jsx-a11y/href-no-hash": "off",
+    // "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }]
+  },
+  "globals": {
+    "__ASSETS__": true,
+    "__CLIENT__": true,
+    "__SERVER__": true,
+    "__PRODUCTION__": true,
+    "__DEV__": true
+  }
+}

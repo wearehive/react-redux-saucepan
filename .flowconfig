@@ -1,0 +1,12 @@
+[ignore]
+<PROJECT_ROOT>/build/.*
+.*/node_modules/*
+
+[include]
+
+[libs]
+
+[options]
+emoji=true
+suppress_type=$FlowFixMe
+suppress_comment= \\(.\\|\n\\)*\\flow-disable-next-line
