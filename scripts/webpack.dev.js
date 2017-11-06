@@ -1,7 +1,8 @@
 const path = require('path');
 const webpack = require('webpack'); // eslint-disable-line import/no-extraneous-dependencies
+const ExtractTextPlugin = require('extract-text-webpack-plugin'); // eslint-disable-line import/no-extraneous-dependencies
 
-const { JS_PATH } = require('../config');
+const { ASSETS_PATH } = require('../config');
 
 const buildPath = path.resolve(__dirname, '../build');
 const srcPath = path.resolve(__dirname, '../src');
@@ -20,7 +21,7 @@ module.exports = {
     filename: 'app.js',
     // the output bundle
     path: buildPath,
-    publicPath: JS_PATH,
+    publicPath: ASSETS_PATH,
     // necessary for HMR to know where to load the hot update chunks
     pathinfo: true,
   },
@@ -30,34 +31,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.scss$/,
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              importLoaders: 2,
-              sourceMap: true,
-              localIdentName: '[local]___[hash:base64:5]',
-            },
-          },
-          {
-            loader: 'autoprefixer-loader',
-            options: {
-              browsers: 'last 2 version',
-            },
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              outputStyle: 'expanded',
-              sourceMap: true,
-            },
-          },
-        ],
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader'] }),
       },
       // Font Definitions
       {
@@ -98,5 +73,6 @@ module.exports = {
       __PRODUCTION__: false,
       __DEV__: true,
     }),
+    new ExtractTextPlugin('app.css'),
   ],
 };

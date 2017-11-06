@@ -4,13 +4,13 @@ import compression from 'compression';
 import express from 'express';
 
 import routing from './routing';
-import { WEB_PORT, JS_PATH, HOST } from './../../config';
+import { WEB_PORT, ASSETS_PATH, HOST } from './../../config';
 
 const app: express$Application = express();
 
 app.use(compression());
 
-app.use(JS_PATH, express.static('build'));
+app.use(ASSETS_PATH, express.static('build'));
 app.use(express.static('static'));
 
 // compress the requeted js file

@@ -5,7 +5,7 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 /*  eslint-enable import/no-extraneous-dependencies */
-const { JS_PATH } = require('../config');
+const { ASSETS_PATH } = require('../config');
 
 const srcPath = path.resolve(__dirname, '../src');
 const buildPath = path.resolve(__dirname, '../build');
@@ -19,7 +19,7 @@ module.exports = {
   output: {
     path: buildPath,
     filename: 'app.js',
-    publicPath: JS_PATH,
+    publicPath: ASSETS_PATH,
   },
   resolve: {
     extensions: ['.json', '.js'],
@@ -27,34 +27,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.scss$/,
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              importLoaders: 2,
-              sourceMap: true,
-              localIdentName: '[local]___[hash:base64:5]',
-            },
-          },
-          {
-            loader: 'autoprefixer-loader',
-            options: {
-              browsers: 'last 2 version',
-            },
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              outputStyle: 'expanded',
-              sourceMap: true,
-            },
-          },
-        ],
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader'] }),
       },
       // Font Definitions
       {
@@ -99,19 +73,7 @@ module.exports = {
         NODE_ENV: JSON.stringify('production'),
       },
     }),
-    new ExtractTextPlugin({ filename: 'app.css', allChunks: true }),
-    // I think this tells react that you are in production
-    // new UglifyJSPlugin({
-    //   sourceMap: true,
-    //   compress: {
-    //     drop_console: true,
-    //     warnings: false,
-    //   },
-    // }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      // tells loaders we are in minimise mode so they do their job according to that
-    }),
+    new ExtractTextPlugin('app.css'),
     new CompressionPlugin({
       asset: '[path].gz[query]',
       algorithm: 'gzip',
