@@ -1,6 +1,10 @@
 // @flow
-import { JS_PATH, APP_NAME } from '../../config';
-// FIXME: sort this out
+// css should be handled by front-endwebpack because style-loader needs window obj
+// flow-disable-next-line
+import '../../node_modules/bootstrap/dist/css/bootstrap-reboot.min.css';
+// flow-disable-next-line
+import '../../node_modules/bootstrap/dist/css/bootstrap-grid.min.css';
+import { ASSETS_PATH, APP_NAME } from '../../config';
 
 export default function generateHtmlPage(appHtml: ?string, plainPartialState: any) {
   return `<html lang="en">
@@ -14,14 +18,14 @@ export default function generateHtmlPage(appHtml: ?string, plainPartialState: an
         user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"
       />
       <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-
+      <link rel="stylesheet" type="text/css" href="${ASSETS_PATH}/app.css" />
       </head>
     <body>
         <div id="app">${appHtml || ''}</div>
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(plainPartialState)}
         </script>
-        <script src="${JS_PATH}/app.js"></script>
+        <script src="${ASSETS_PATH}/app.js"></script>
       </body>
     </html>`;
 }

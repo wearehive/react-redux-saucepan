@@ -8,6 +8,7 @@ const middlewares: Array<any> = [thunkMiddleware];
 
 // You only need state logger on client side in dev mode
 // FIXME: dev webpack cant make globals
+// FIXME: use the chrome extension
 // TODO: see if you can use dynamic import
 
 // const enhancer = compose(
