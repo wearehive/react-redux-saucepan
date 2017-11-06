@@ -13,9 +13,9 @@ import { HOME_PAGE_ROUTE, MY_REPORT_PAGE_ROUTE, MY_TREATMENT_PAGE_ROUTE } from '
 
 export default function App() {
   return (
-    <container>
+    <div>
       <header>header</header>
-      <navbar>navbar</navbar>
+      <nav>navbar</nav>
       <main>
         <Switch>
           <Route exact path={HOME_PAGE_ROUTE} render={() => <HomePage />} />
@@ -26,6 +26,6 @@ export default function App() {
       </main>
       <section>sidebar</section>
       <footer>footer</footer>
-    </container>
+    </div>
   );
 }

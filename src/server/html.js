@@ -1,9 +1,5 @@
 // @flow
-// css should be handled by front-endwebpack because style-loader needs window obj
-// flow-disable-next-line
-import '../../node_modules/bootstrap/dist/css/bootstrap-reboot.min.css';
-// flow-disable-next-line
-import '../../node_modules/bootstrap/dist/css/bootstrap-grid.min.css';
+
 import { ASSETS_PATH, APP_NAME } from '../../config';
 
 export default function generateHtmlPage(appHtml: ?string, plainPartialState: any) {
