@@ -3,11 +3,10 @@
 import React from 'react';
 
 const Footer = () => (
-  <div className="container mt-5">
+  <footer>
     <hr />
-    <footer>
-      <p>Some stuff</p>;
-    </footer>
-  </div>);
+    <p>Some stuff</p>
+  </footer>
+);
 
 export default Footer;

@@ -4,6 +4,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router';
+import { ServerStyleSheet } from 'styled-components';
 
 import initStore from '../shared/initStore';
 import html from './html';
@@ -23,6 +24,8 @@ export default function render(location: string, plainPartialState: any) {
       </StaticRouter>
     </Provider>
   );
-  const appHtml: string = renderToString(wrapApp);
-  return html(appHtml, plainPartialState);
+  const sheet = new ServerStyleSheet();
+  const appHtml: string = renderToString(sheet.collectStyles(wrapApp));
+  const styleTags: string = sheet.getStyleTags(); // or sheet.getStyleElement()
+  return html(plainPartialState, appHtml, styleTags);
 }

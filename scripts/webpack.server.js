@@ -1,9 +1,11 @@
 const path = require('path');
 const webpack = require('webpack'); // eslint-disable-line import/no-extraneous-dependencies
 const nodeExternals = require('webpack-node-externals'); // eslint-disable-line import/no-extraneous-dependencies
+const ExtractTextPlugin = require('extract-text-webpack-plugin'); // eslint-disable-line import/no-extraneous-dependencies
 
 const srcPath = path.resolve(__dirname, '../');
 const buildPath = path.resolve(__dirname, '../build');
+const { ASSETS_PATH } = require('../config');
 
 module.exports = {
   target: 'node',
@@ -20,9 +22,22 @@ module.exports = {
   output: {
     path: buildPath,
     filename: '[name].js',
+    publicPath: ASSETS_PATH,
   },
   module: {
     rules: [
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader'] }),
+      },
+      // Font Definitions
+      {
+        test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+        },
+      },
       {
         test: /\.(png|jpg|gif|svg|ico)$/,
         loader: 'file-loader',
@@ -60,6 +75,7 @@ module.exports = {
       __PRODUCTION__: true,
       __DEV__: false,
     }),
+    new ExtractTextPlugin('app.css'),
     new webpack.DefinePlugin({
       // Needed for reducing React's size
       'process.env': {

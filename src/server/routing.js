@@ -1,25 +1,23 @@
 // @flow
 
+// routes
+import { HOME_PAGE_ROUTE, ABOUT_PAGE_ROUTE, CONTACT_PAGE_ROUTE } from '../shared/routes';
+
 // these functions load the data
-import { getHomePageData, myReportPage, myTreatmentPage } from './controller';
-
-import { HOME_PAGE_ROUTE, MY_REPORT_PAGE_ROUTE, MY_TREATMENT_PAGE_ROUTE } from '../shared/routes';
-
+import getGists from './controller';
 import render from './render';
 
 export default (app: express$Application) => {
   app.get(HOME_PAGE_ROUTE, async (req: express$Request, res: express$Response) => {
-    const dataToPopulate = await getHomePageData();
-    res.send(render(req.url, dataToPopulate));
+    res.send(render(req.url, await getGists()));
   });
 
-  app.get(MY_REPORT_PAGE_ROUTE, (req: express$Request, res: express$Response) => {
-    res.send(render(req.url, myReportPage()));
+  app.get(ABOUT_PAGE_ROUTE, (req: express$Request, res: express$Response) => {
+    res.send(render(req.url, null));
   });
 
-  app.get(MY_TREATMENT_PAGE_ROUTE, async (req: express$Request, res: express$Response) => {
-    const dataToPopulate = await myTreatmentPage();
-    res.send(render(req.url, dataToPopulate));
+  app.get(CONTACT_PAGE_ROUTE, async (req: express$Request, res: express$Response) => {
+    res.send(render(req.url, null));
   });
 
   app.get('/500', () => {

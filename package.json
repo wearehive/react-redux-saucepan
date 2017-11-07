@@ -8,15 +8,18 @@
   "description": "react-redux-saucepan",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -rf ./node_modules && npm cache verify && rm ./package-lock.json",
+    "clean":
+      "rm -rf ./node_modules && npm cache verify && rm ./package-lock.json",
     "flow:start": "flow start",
     "flow:stop": "flow stop",
-    "flow": "flow-coverage-report -i 'src/**/*.js' -i 'src/**/*.jsx' -x 'src/test/**' && flow",
-    "start:dev": "rm -f ./build/* && babel-watch ./src/server/index.dev.js -w ./server",
+    "flow": "flow-coverage-report -i 'src/**/*.js' -x 'src/test/**' && flow",
+    "start:dev":
+      "rm -rf ./build/* && babel-watch ./src/server/index.dev.js -w ./server",
     "start": "node build/index.js NODE_ENV=production",
     "prestart": "npm run test && npm run build",
     "test": "echo \"Error: no test specified\" ",
-    "build": "webpack --config ./scripts/webpack.server.js && webpack -p --config ./scripts/webpack.client.js"
+    "build":
+      "webpack --config ./scripts/webpack.server.js && webpack -p --config ./scripts/webpack.client.js"
   },
   "author": "WeAreHive Limited <vahid@wearehive.co.uk>",
   "license": "MIT",

@@ -32,7 +32,7 @@ module.exports = {
       },
       // Font Definitions
       {
-        test: /\.(ttf|woff|eot|woff2)$/,
+        test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
         loader: 'file-loader',
         options: {
           name: '[name].[ext]',

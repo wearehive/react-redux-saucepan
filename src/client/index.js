@@ -10,12 +10,6 @@ import { BrowserRouter } from 'react-router-dom';
 // to let us keep the state when hot reloading
 import { AppContainer } from 'react-hot-loader';
 
-// css should be handled by front-endwebpack because style-loader needs window obj
-// flow-disable-next-line
-import '../../node_modules/bootstrap/dist/css/bootstrap-reboot.min.css';
-// flow-disable-next-line
-import '../../node_modules/bootstrap/dist/css/bootstrap-grid.min.css';
-
 import App from '../shared/App';
 import initStore from '../shared/initStore';
 

@@ -6,20 +6,10 @@ import rootReducer from './reducers';
 
 const middlewares: Array<any> = [thunkMiddleware];
 
-// You only need state logger on client side in dev mode
-// FIXME: dev webpack cant make globals
-// FIXME: use the chrome extension
-// TODO: see if you can use dynamic import
-
-// const enhancer = compose(
-//   applyMiddleware(...middlewares),
-// );
-
 export default function initStore(loadedState: any): Store {
-  if (loadedState) {
-    return compose(applyMiddleware(...middlewares))(createStore)(rootReducer, loadedState);
-    // return createStore(rootReducer, loadedState, enhancer);
-  }
-  return compose(applyMiddleware(...middlewares))(createStore)(rootReducer);
-  // return createStore(rootReducer, enhancer);
+  const composeEnhancers = __DEV__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+    : compose;
+
+  return createStore(rootReducer, loadedState, composeEnhancers(applyMiddleware(...middlewares)));
 }

@@ -32,7 +32,7 @@ app.use(webpackDevMiddleware(compiler, {
 app.use(webpackHotMiddleware(compiler));
 
 app.get('*', (req: express$Request, res: express$Response) => {
-  res.send(html(null, null));
+  res.send(html());
 });
 
 // flow-disable-next-line
