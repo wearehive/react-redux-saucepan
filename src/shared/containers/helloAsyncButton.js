@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { fetchData, type Dispatch } from '../reducers/hello';
 import Button from '../components/Button';
 
-const mapStateToProps = ({ hello }) => ({
+const mapStateToProps = ({ hello }): {} => ({
   loaded: hello.loaded,
   loading: hello.loading,
   data: hello.data,
