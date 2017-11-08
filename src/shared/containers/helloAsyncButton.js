@@ -7,8 +7,9 @@ import Button from '../components/Button';
 
 const mapStateToProps = ({ hello }) => ({
   loaded: hello.loaded,
-  loading: hello.loaded,
+  loading: hello.loading,
   data: hello.data,
+  message: hello.messageAsync,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): {} => ({

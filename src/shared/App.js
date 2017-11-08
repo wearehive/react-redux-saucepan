@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { injectGlobal } from 'styled-components';
+import styled, { injectGlobal } from 'styled-components';
 import { Switch } from 'react-router';
 import { Route } from 'react-router-dom';
 // flow-disable-next-line
@@ -16,27 +16,30 @@ import HomePage from './pages/Home';
 import AboutPagePage from './pages/AboutPage';
 import ContactPagePage from './pages/ContactPage';
 import NotFoundPage from './pages/NotFound';
-import Footer from './components/Footer';
+import FooterComponent from './components/Footer';
 import TopNav from './components/TopNav';
 
 import { HOME_PAGE_ROUTE, ABOUT_PAGE_ROUTE, CONTACT_PAGE_ROUTE } from '../shared/routes';
 
 export default function App() {
-  return [
-    <header key="header">
-      <TopNav />
-    </header>,
-    <main key="main">
-      <Switch>
-        <Route exact path={HOME_PAGE_ROUTE} render={() => <HomePage />} />
-        <Route path={ABOUT_PAGE_ROUTE} render={() => <AboutPagePage />} />
-        <Route path={CONTACT_PAGE_ROUTE} render={() => <ContactPagePage />} />
-        <Route component={NotFoundPage} />
-      </Switch>
-    </main>,
-    <section key="sidebar">sidebar</section>,
-    <Footer key="footer" />,
-  ];
+  return (
+    <Page>
+      <Header>
+        <TopNav />
+      </Header>
+      <Main>
+        <Switch>
+          <Route exact path={HOME_PAGE_ROUTE} render={() => <HomePage />} />
+          <Route path={ABOUT_PAGE_ROUTE} render={() => <AboutPagePage />} />
+          <Route path={CONTACT_PAGE_ROUTE} render={() => <ContactPagePage />} />
+          <Route component={NotFoundPage} />
+        </Switch>
+      </Main>
+      <Footer>
+        <FooterComponent />
+      </Footer>
+    </Page>
+  );
 }
 
 // eslint-disable-next-line no-unused-expressions
@@ -57,7 +60,33 @@ injectGlobal`
   }
 
   body {
-    background: red;
     font-family: 'GTWalsheim Light';
+    min-height: 100vh;
+    flex-direction: column;
   }
+`;
+
+// import styled, { css } from 'styled-components';
+
+const Page = styled.div`
+  /*
+   * Lay out the children of this container with
+   * flexbox, which is horizontal by default.
+   */
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+`;
+
+const Header = styled.header`
+  flex: none;
+`;
+
+const Footer = styled.footer`
+  flex: none;
+`;
+
+const Main = styled.main`
+  display: flex;
+  flex: 1 0 auto;
 `;
