@@ -14,7 +14,6 @@ module.exports = {
   devtool: 'source-map',
   entry: {
     index: [
-      // 'babel-polyfill',
       // entry point of the app
       './src/server/index',
     ],
